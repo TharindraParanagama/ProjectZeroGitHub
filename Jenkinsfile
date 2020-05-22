@@ -3,7 +3,7 @@ pipeline {
 	
     environment{
         JENKINS_NODE_COOKIE = 'dontkillmeplease'
-        PORT=8080
+        PORT=5000
     }
     stages {
         stage('Preparation') { // for display purposes
