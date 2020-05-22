@@ -24,7 +24,7 @@ pipeline {
         stage('Install node modules'){
             steps{
                 // install dependencies as described in the package.json
-                sh 'nvm install node'
+                sh 'sudo apt install nodejs'
             }
 
         }
