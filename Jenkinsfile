@@ -24,7 +24,7 @@ pipeline {
         stage('Install node modules'){
             steps{
                 // install dependencies as described in the package.json
-                sh 'npm install'
+                sh 'sudo npm install'
             }
 
         }
