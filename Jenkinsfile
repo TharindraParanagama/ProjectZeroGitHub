@@ -21,13 +21,7 @@ pipeline {
               git branch: 'master', credentialsId:'a1a5be2d-10cb-41f1-8f22-2f03e7c3d41d', url:'https://github.com/TharindraParanagama/ProjectZeroGitHub.git'
            }
         }
-        stage('Install node modules'){
-            steps{
-                // install dependencies as described in the package.json
-                sh 'sudo apt install nodejs'
-            }
-
-        }
+ 
         stage('Destroy Old Server') {
             steps {
                 script {
