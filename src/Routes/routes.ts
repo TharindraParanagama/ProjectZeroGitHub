@@ -15,7 +15,7 @@ path.use(sess)
 //route to the landing page with a get request
 path.get('/landingPage',function(req:any,res:any){
 
-    res.send('Hi Welcome to the book store\n Please login to proceed.Yay')
+    res.send('Hi Welcome to the book store\n Please login to proceed.Ok')
     
 })
 
