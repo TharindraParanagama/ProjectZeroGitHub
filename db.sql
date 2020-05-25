@@ -95,7 +95,6 @@ jack@gmail.com	hjhkj	vendor
 
 COPY public.supplier (supplier_id, supplier_rating, supplier_location, supplier_name) FROM stdin;
 S01	4.5	Texas	Barnes & Noble
-S02	3	California	Hunter Books
 S03	2	Virginia	Raymond
 S04	3	New York	Terrace
 \.
