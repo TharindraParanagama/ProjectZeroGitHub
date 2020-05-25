@@ -16,7 +16,7 @@ exports.path.use(middleware_1.bp);
 exports.path.use(middleware_1.sess);
 //route to the landing page with a get request
 exports.path.get('/landingPage', function (req, res) {
-    res.send('Hi Welcome to the book store\n Please login to proceed.Yay');
+    res.send('Hi Welcome to the book store\n Please login to proceed.Check');
 });
 //route to the login portal with the user credentials to be specified in the 
 //body of the request
