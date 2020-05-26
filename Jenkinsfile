@@ -30,7 +30,7 @@ pipeline {
                         sh 'kill $(lsof -t -i:$PORT)'
                     } catch (all) {
                         // if it fails that should mean a server wasn't already running
-                        echo 'No server was already running'
+                        echo 'No server was not already running'
                     }
                 }
             }

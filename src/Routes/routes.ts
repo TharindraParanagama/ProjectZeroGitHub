@@ -21,35 +21,19 @@ path.get('/landingPage',function(req:any,res:any){
 
 //route to the login portal with the user credentials to be specified in the 
 //body of the request
-path.post('/login',auth,function(req:any,res:any){
-    
-  
-})
+path.post('/login',auth)
 
-//admin role
-path.get('/admin',validator,function(req:any,res:any){
+//multiple roles
+path.get('/role',validator,function(req:any,res:any){
     if(req.session.role==="admin"){    
         res.send('Welcome to admin portal')
+    }else if(req.session.role==="vendor"){
+        res.send('Welcome to vendor portal')
     }else{
-        res.send('You do not have admin rights')
-    }
- })
-//customer role
- path.get('/customer',validator,function(req:any,res:any){
-    if(req.session.role==="customer"){    
         res.send('Welcome to customer portal')
-    }else{
-        res.send('You do not have customer rights')
     }
  })
-//vendor role
- path.get('/vendor',validator,function(req:any,res:any){
-    if(req.session.role==="vendor"){    
-        res.send('Welcome to vednor portal')
-    }else{
-        res.send('You do not have vendor rights')
-    }
- })
+
 
 //route to search section
 path.get('/search',validator,function(req:any,res:any){
@@ -69,10 +53,10 @@ path.get('/search',validator,function(req:any,res:any){
 //affiliated with my store
 path.get('/ID/:supplier_id',validator,function(req:any,res:any){
    
-    let path:any=req.params
+    let url:any=req.params
 
     db.any('SELECT * FROM book_catalog WHERE supplier_id=${supplier_id}',{
-       supplier_id:path.supplier_id
+       supplier_id:url.supplier_id
     })
     .then((result: any)=>{
         res.json(result)
@@ -86,10 +70,10 @@ path.get('/ID/:supplier_id',validator,function(req:any,res:any){
 //route to obtain title of books which is higher that a given supplier rating
 path.get('/rating/:supplier_rating',validator,function(req:any,res:any){
 
-    let path:any=req.params
+    let url:any=req.params
 
     db.any('SELECT title FROM book_catalog INNER JOIN supplier ON book_catalog.supplier_id=supplier.supplier_id WHERE supplier_rating > ${supplier_rating}',{
-       supplier_rating:path.supplier_rating
+       supplier_rating:url.supplier_rating
     })
     .then((result: any)=>{
         res.json(result)

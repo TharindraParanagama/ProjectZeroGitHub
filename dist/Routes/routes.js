@@ -20,33 +20,17 @@ exports.path.get('/landingPage', function (req, res) {
 });
 //route to the login portal with the user credentials to be specified in the 
 //body of the request
-exports.path.post('/login', middleware_1.auth, function (req, res) {
-});
-//admin role
-exports.path.get('/admin', middleware_1.validator, function (req, res) {
+exports.path.post('/login', middleware_1.auth);
+//multiple roles
+exports.path.get('/role', middleware_1.validator, function (req, res) {
     if (req.session.role === "admin") {
         res.send('Welcome to admin portal');
     }
-    else {
-        res.send('You do not have admin rights');
+    else if (req.session.role === "vendor") {
+        res.send('Welcome to vendor portal');
     }
-});
-//customer role
-exports.path.get('/customer', middleware_1.validator, function (req, res) {
-    if (req.session.role === "customer") {
+    else {
         res.send('Welcome to customer portal');
-    }
-    else {
-        res.send('You do not have customer rights');
-    }
-});
-//vendor role
-exports.path.get('/vendor', middleware_1.validator, function (req, res) {
-    if (req.session.role === "vendor") {
-        res.send('Welcome to vednor portal');
-    }
-    else {
-        res.send('You do not have vendor rights');
     }
 });
 //route to search section
@@ -62,9 +46,9 @@ exports.path.get('/search', middleware_1.validator, function (req, res) {
 //route to obtain the details for all the book supplied by a given supplier
 //affiliated with my store
 exports.path.get('/ID/:supplier_id', middleware_1.validator, function (req, res) {
-    let path = req.params;
+    let url = req.params;
     connection_1.db.any('SELECT * FROM book_catalog WHERE supplier_id=${supplier_id}', {
-        supplier_id: path.supplier_id
+        supplier_id: url.supplier_id
     })
         .then((result) => {
         res.json(result);
@@ -75,9 +59,9 @@ exports.path.get('/ID/:supplier_id', middleware_1.validator, function (req, res)
 });
 //route to obtain title of books which is higher that a given supplier rating
 exports.path.get('/rating/:supplier_rating', middleware_1.validator, function (req, res) {
-    let path = req.params;
+    let url = req.params;
     connection_1.db.any('SELECT title FROM book_catalog INNER JOIN supplier ON book_catalog.supplier_id=supplier.supplier_id WHERE supplier_rating > ${supplier_rating}', {
-        supplier_rating: path.supplier_rating
+        supplier_rating: url.supplier_rating
     })
         .then((result) => {
         res.json(result);
