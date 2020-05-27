@@ -2,7 +2,7 @@ pipeline {
     agent any
 	
     environment{
-        JENKINS_NODE_COOKIE = 'dontkillmeplease'
+        JENKINS_NODE_COOKIE = 'dontkillme'
         PORT=5000
     }
     stages {
