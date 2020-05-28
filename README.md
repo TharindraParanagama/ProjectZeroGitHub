@@ -1,6 +1,6 @@
 # ProjectZero
 
-This is my first project with Revature. The theme of the project is an Online Book Store.
+This is my first project with Revature. The theme of the project is an Online Book Store. 
 
 Please refer the wiki documentation on details about this repository.
 
