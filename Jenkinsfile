@@ -4,7 +4,6 @@ pipeline {
     environment{
         JENKINS_NODE_COOKIE = 'dontkillme'
         PORT=5000
-        HOME = '.'
     }
     stages {
         stage('Preparation') { // for display purposes
