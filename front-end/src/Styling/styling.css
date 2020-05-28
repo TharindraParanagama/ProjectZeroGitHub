@@ -1,0 +1,13 @@
+.tales {
+  width: 100%;
+}
+.carousel-inner {
+  width: 100%;
+  height: 500px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
