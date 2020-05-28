@@ -4,6 +4,7 @@ pipeline {
     environment{
         JENKINS_NODE_COOKIE = 'dontkillme'
         PORT=5000
+        HOME = '.'
     }
     stages {
         stage('Preparation') { // for display purposes
@@ -20,6 +21,11 @@ pipeline {
               // url: url to your repo
               git branch: 'master', credentialsId:'a1a5be2d-10cb-41f1-8f22-2f03e7c3d41d', url:'https://github.com/TharindraParanagama/ProjectZeroGitHub.git'
            }
+        }
+        stage('Build') {
+            steps {
+                sh "npm install"
+            }
         }
  
         stage('Destroy Old Server') {
