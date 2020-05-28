@@ -20,7 +20,7 @@ path.use(sess);
 //route to the landing page with a get request
 path.get("/landingPage", function (req: any, res: any) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.send("Hi Welcome to the book store\n Please login to proceed.Check");
+  res.send("Hi Welcome to the book store\n Please login to proceed.Changed");
 });
 
 //route to the login portal with the user credentials to be specified in the
