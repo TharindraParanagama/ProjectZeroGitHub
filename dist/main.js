@@ -7,9 +7,7 @@ exports.app = void 0;
 //importing modules
 const express_1 = __importDefault(require("express"));
 const routes_1 = require("./Routes/routes");
-const cors_1 = __importDefault(require("cors"));
 //creating and naming an instance of express object
 exports.app = express_1.default();
 //making using the router middleware
-exports.app.use(cors_1.default);
 exports.app.use("/", routes_1.path);

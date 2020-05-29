@@ -8,6 +8,7 @@ import {
   auth,
   validator,
 } from "../Middleware/middleware";
+import cors from "cors";
 
 //creating a router instance
 export const path: any = express.Router();
@@ -16,6 +17,7 @@ export const path: any = express.Router();
 path.use(requestTracker);
 path.use(bp);
 path.use(sess);
+path.use(cors);
 
 //route to the landing page with a get request
 path.get("/landingPage", function (req: any, res: any) {

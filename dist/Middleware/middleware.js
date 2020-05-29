@@ -25,7 +25,6 @@ exports.requestTracker = (req, res, next) => {
 };
 //authentication middleware with password hashing to authenticate users
 exports.auth = function (req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     const saltRounds = 10;
     req.session.username = req.body.username;
     req.session.password = req.body.password;
