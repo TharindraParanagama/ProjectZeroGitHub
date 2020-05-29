@@ -19,7 +19,6 @@ path.use(sess);
 
 //route to the landing page with a get request
 path.get("/landingPage", function (req: any, res: any) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.send("Hi Welcome to the book store\n Please login to proceed.Hi");
 });
 
@@ -40,7 +39,6 @@ path.get("/role", validator, function (req: any, res: any) {
 
 //route to search section
 path.get("/search", validator, function (req: any, res: any) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   db.any("SELECT * FROM book_catalog")
     .then((result: any) => {
       res.json(result);

@@ -16,7 +16,6 @@ exports.path.use(middleware_1.bp);
 exports.path.use(middleware_1.sess);
 //route to the landing page with a get request
 exports.path.get("/landingPage", function (req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     res.send("Hi Welcome to the book store\n Please login to proceed.Hi");
 });
 //route to the login portal with the user credentials to be specified in the
@@ -36,7 +35,6 @@ exports.path.get("/role", middleware_1.validator, function (req, res) {
 });
 //route to search section
 exports.path.get("/search", middleware_1.validator, function (req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     connection_1.db.any("SELECT * FROM book_catalog")
         .then((result) => {
         res.json(result);
