@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                
+                sh "sudo chown -R ec2-user: BookLogPipeline"
                 sh "npm install"
             }
         }
