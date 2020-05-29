@@ -21,12 +21,7 @@ pipeline {
               git branch: 'master', credentialsId:'be5f2de2-aaf6-47cd-a060-87189ed8a308', url:'https://github.com/TharindraParanagama/ProjectZeroGitHub.git'
            }
         }
-        stage('Build') {
-            steps {
-                sh "npm install"
-            }
-        }
- 
+       
         stage('Destroy Old Server') {
             steps {
                 script {
