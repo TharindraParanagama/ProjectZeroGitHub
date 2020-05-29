@@ -23,7 +23,6 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh"chown -R ec2-user: BookLogPipeline@2"
                 sh "npm install"
             }
         }
