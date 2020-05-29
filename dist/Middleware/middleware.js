@@ -10,9 +10,13 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const connection_1 = require("../DB Connection/connection");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 //creating an instance and setting parameters of the session middleware
-exports.sess = express_session_1.default({ secret: 'test', saveUninitialized: true, resave: true });
-//creating an instance of the body parser middleware to parse json objects specified in the body 
-//portion of a request 
+exports.sess = express_session_1.default({
+    secret: "test",
+    saveUninitialized: true,
+    resave: true,
+});
+//creating an instance of the body parser middleware to parse json objects specified in the body
+//portion of a request
 exports.bp = body_parser_1.default.json();
 //logger that logs the request method,request url,request timestamp and request query type
 exports.requestTracker = (req, res, next) => {
@@ -21,22 +25,23 @@ exports.requestTracker = (req, res, next) => {
 };
 //authentication middleware with password hashing to authenticate users
 exports.auth = function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     const saltRounds = 10;
     req.session.username = req.body.username;
     req.session.password = req.body.password;
     req.session.role = req.body.role;
     const pass = bcrypt_1.default.hashSync(req.session.password, saltRounds);
-    connection_1.db.one('SELECT username,password FROM members WHERE username=${user_name} AND password=${password} AND role=${role}', {
+    connection_1.db.one("SELECT username,password FROM members WHERE username=${user_name} AND password=${password} AND role=${role}", {
         user_name: req.session.username,
         password: req.session.password,
-        role: req.session.role
+        role: req.session.role,
     })
         .then((result) => {
         if (bcrypt_1.default.compareSync(result.password, pass)) {
-            res.send('You are logged in');
+            res.send("You are logged in");
         }
         else {
-            res.send('login failed');
+            res.send("login failed");
         }
         next();
     })
