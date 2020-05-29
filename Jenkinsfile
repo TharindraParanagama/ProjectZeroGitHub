@@ -18,12 +18,12 @@ pipeline {
               // branch: the branch that you want to build
               // credentialsId: the ID of the credentials for your GitLab repo that is being managed by Jenkins
               // url: url to your repo
-              git branch: 'master', credentialsId:'a1a5be2d-10cb-41f1-8f22-2f03e7c3d41d', url:'https://github.com/TharindraParanagama/ProjectZeroGitHub.git'
+              git branch: 'master', credentialsId:'a8053c05-a47e-4122-bbde-eef91540db87', url:'https://github.com/TharindraParanagama/ProjectZeroGitHub.git'
            }
         }
         stage('Build') {
             steps {
-                
+                sh "sudo chown -R ec2-user: BookLogPipeline"
                 sh "npm install"
             }
         }
