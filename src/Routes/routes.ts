@@ -26,7 +26,7 @@ path.get("/landingPage", function (req: any, res: any) {
 
 //route to the login portal with the user credentials to be specified in the
 //body of the request
-path.post("/login", auth, function (req: any, res: any) {});
+path.post("/login", auth);
 
 //multiple roles
 path.get("/role", validator, function (req: any, res: any) {

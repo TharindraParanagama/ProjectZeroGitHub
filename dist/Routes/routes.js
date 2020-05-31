@@ -21,7 +21,7 @@ exports.path.get("/landingPage", function (req, res) {
 });
 //route to the login portal with the user credentials to be specified in the
 //body of the request
-exports.path.post("/login", middleware_1.auth, function (req, res) { });
+exports.path.post("/login", middleware_1.auth);
 //multiple roles
 exports.path.get("/role", middleware_1.validator, function (req, res) {
     if (req.session.role === "admin") {

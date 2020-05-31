@@ -23,9 +23,9 @@ exports.requestTracker = (req, res, next) => {
     console.log(`A ${req.method} request was made to path ${req.path} on the following timestamp ${new Date()} and the query for this is ${req.query}`);
     next();
 };
+const saltRounds = 10;
 //authentication middleware with password hashing to authenticate users
 exports.auth = function (req, res, next) {
-    const saltRounds = 10;
     req.session.username = req.body.username;
     req.session.password = req.body.password;
     req.session.role = req.body.role;
