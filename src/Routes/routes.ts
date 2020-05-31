@@ -17,7 +17,7 @@ export const path: any = express.Router();
 path.use(requestTracker);
 path.use(bp);
 path.use(sess);
-//path.use(cors());
+path.use(cors());
 
 //route to the landing page with a get request
 path.get("/landingPage", function (req: any, res: any) {
@@ -26,9 +26,7 @@ path.get("/landingPage", function (req: any, res: any) {
 
 //route to the login portal with the user credentials to be specified in the
 //body of the request
-path.post("/login", auth, function (req: any, res: any) {
-  res.setHeader("Access-Control-Allow-Credentials", "*");
-});
+path.post("/login", auth, function (req: any, res: any) {});
 
 //multiple roles
 path.get("/role", validator, function (req: any, res: any) {
