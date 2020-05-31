@@ -8,16 +8,17 @@ exports.path = void 0;
 const express_1 = __importDefault(require("express"));
 const connection_1 = require("../DB Connection/connection");
 const middleware_1 = require("../Middleware/middleware");
+const cors_1 = __importDefault(require("cors"));
 //creating a router instance
 exports.path = express_1.default.Router();
 //using the middleware
 exports.path.use(middleware_1.requestTracker);
 exports.path.use(middleware_1.bp);
 exports.path.use(middleware_1.sess);
-//path.use(cors());
+exports.path.use(cors_1.default());
 //route to the landing page with a get request
 exports.path.get("/landingPage", function (req, res) {
-    res.send("Hi Welcome to the book store\n Please login to proceed.Hi");
+    res.send("Hi Welcome to the book store\n Please login to proceed.");
 });
 //route to the login portal with the user credentials to be specified in the
 //body of the request

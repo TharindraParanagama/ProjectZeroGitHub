@@ -26,9 +26,11 @@ export const requestTracker: any = (req: any, res: any, next: any) => {
   );
   next();
 };
-const saltRounds: number = 10;
+
 //authentication middleware with password hashing to authenticate users
 export let auth: any = function (req: any, res: any, next: any) {
+  const saltRounds: number = 10;
+
   req.session.username = req.body.username;
   req.session.password = req.body.password;
   req.session.role = req.body.role;
