@@ -26,9 +26,7 @@ path.get("/landingPage", function (req: any, res: any) {
 
 //route to the login portal with the user credentials to be specified in the
 //body of the request
-path.post("/login", auth, function (req: any, res: any) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-});
+path.post("/login", auth, function (req: any, res: any) {});
 
 //multiple roles
 path.get("/role", validator, function (req: any, res: any) {
