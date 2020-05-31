@@ -7,8 +7,8 @@ import bcrypt from "bcrypt";
 //creating an instance and setting parameters of the session middleware
 export const sess: any = session({
   secret: "test",
-  saveUninitialized: true,
-  resave: true,
+  saveUninitialized: false,
+  resave: false,
 });
 
 //creating an instance of the body parser middleware to parse json objects specified in the body
@@ -29,6 +29,7 @@ export const requestTracker: any = (req: any, res: any, next: any) => {
 
 //authentication middleware with password hashing to authenticate users
 export let auth: any = function (req: any, res: any, next: any) {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   const saltRounds: number = 10;
 
   req.session.username = req.body.username;
@@ -62,6 +63,7 @@ export let auth: any = function (req: any, res: any, next: any) {
 
 //validator middleware
 export const validator: any = function (req: any, res: any, next: any) {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   if (req.session.username && req.session.password) {
     next();
   } else {

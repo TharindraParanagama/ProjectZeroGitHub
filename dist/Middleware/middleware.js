@@ -12,8 +12,8 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 //creating an instance and setting parameters of the session middleware
 exports.sess = express_session_1.default({
     secret: "test",
-    saveUninitialized: true,
-    resave: true,
+    saveUninitialized: false,
+    resave: false,
 });
 //creating an instance of the body parser middleware to parse json objects specified in the body
 //portion of a request
@@ -25,6 +25,7 @@ exports.requestTracker = (req, res, next) => {
 };
 //authentication middleware with password hashing to authenticate users
 exports.auth = function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     const saltRounds = 10;
     req.session.username = req.body.username;
     req.session.password = req.body.password;
@@ -50,6 +51,7 @@ exports.auth = function (req, res, next) {
 };
 //validator middleware
 exports.validator = function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     if (req.session.username && req.session.password) {
         next();
     }
