@@ -29,6 +29,7 @@ exports.auth = function (req, res, next) {
     req.session.username = req.body.username;
     req.session.password = req.body.password;
     req.session.role = req.body.role;
+    console.log(req.session.username);
     const pass = bcrypt_1.default.hashSync(req.session.password, saltRounds);
     connection_1.db.one("SELECT username,password FROM members WHERE username=${user_name} AND password=${password} AND role=${role}", {
         user_name: req.session.username,
@@ -50,6 +51,7 @@ exports.auth = function (req, res, next) {
 };
 //validator middleware
 exports.validator = function (req, res, next) {
+    console.log(req.session.username);
     if (req.session.username && req.session.password) {
         next();
     }

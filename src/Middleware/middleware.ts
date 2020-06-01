@@ -34,6 +34,7 @@ export let auth: any = function (req: any, res: any, next: any) {
   req.session.username = req.body.username;
   req.session.password = req.body.password;
   req.session.role = req.body.role;
+  console.log(req.session.username);
 
   const pass: any = bcrypt.hashSync(req.session.password, saltRounds);
 
@@ -62,6 +63,7 @@ export let auth: any = function (req: any, res: any, next: any) {
 
 //validator middleware
 export const validator: any = function (req: any, res: any, next: any) {
+  console.log(req.session.username);
   if (req.session.username && req.session.password) {
     next();
   } else {

@@ -40,7 +40,7 @@ path.get("/role", validator, function (req: any, res: any) {
 });
 
 //route to search section
-path.get("/search", validator, function (req: any, res: any) {
+path.get("/search", auth, function (req: any, res: any) {
   db.any("SELECT * FROM book_catalog")
     .then((result: any) => {
       res.json(result);
