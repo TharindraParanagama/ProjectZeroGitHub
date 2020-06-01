@@ -11,11 +11,15 @@ const middleware_1 = require("../Middleware/middleware");
 const cors_1 = __importDefault(require("cors"));
 //creating a router instance
 exports.path = express_1.default.Router();
+const config = {
+    origin: "http://localhost:3000",
+    credentials: true,
+};
 //using the middleware
 exports.path.use(middleware_1.requestTracker);
 exports.path.use(middleware_1.bp);
 exports.path.use(middleware_1.sess);
-exports.path.use(cors_1.default());
+exports.path.use(cors_1.default(config));
 //route to the landing page with a get request
 exports.path.get("/landingPage", function (req, res) {
     res.send("Hi Welcome to the book store\n Please login to proceed.");

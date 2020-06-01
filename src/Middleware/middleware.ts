@@ -29,14 +29,13 @@ export const requestTracker: any = (req: any, res: any, next: any) => {
 
 //authentication middleware with password hashing to authenticate users
 export let auth: any = function (req: any, res: any, next: any) {
-  // const saltRounds: number = 10;
+  const saltRounds: number = 10;
 
   req.session.username = req.body.username;
   req.session.password = req.body.password;
   req.session.role = req.body.role;
-  console.log(req.session.username);
 
-  //const pass: any = bcrypt.hashSync(req.session.password, saltRounds);
+  const pass: any = bcrypt.hashSync(req.session.password, saltRounds);
 
   db.one(
     "SELECT username,password FROM members WHERE username=${user_name} AND password=${password} AND role=${role}",
@@ -47,11 +46,11 @@ export let auth: any = function (req: any, res: any, next: any) {
     }
   )
     .then((result: any) => {
-      //if (bcrypt.compareSync(result.password, pass)) {
-      res.send("You are logged in");
-      /*  } else {
+      if (bcrypt.compareSync(result.password, pass)) {
+        res.send("You are logged in");
+      } else {
         res.send("login failed");
-      } */
+      }
       next();
     })
     .catch((error: any) => {
@@ -63,7 +62,6 @@ export let auth: any = function (req: any, res: any, next: any) {
 
 //validator middleware
 export const validator: any = function (req: any, res: any, next: any) {
-  console.log(req.session.username);
   if (req.session.username && req.session.password) {
     next();
   } else {

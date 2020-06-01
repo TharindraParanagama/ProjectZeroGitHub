@@ -13,11 +13,16 @@ import cors from "cors";
 //creating a router instance
 export const path: any = express.Router();
 
+const config = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+
 //using the middleware
 path.use(requestTracker);
 path.use(bp);
 path.use(sess);
-path.use(cors());
+path.use(cors(config));
 
 //route to the landing page with a get request
 path.get("/landingPage", function (req: any, res: any) {

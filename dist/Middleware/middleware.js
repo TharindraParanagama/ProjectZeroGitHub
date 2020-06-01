@@ -8,6 +8,7 @@ exports.validator = exports.auth = exports.requestTracker = exports.bp = exports
 const express_session_1 = __importDefault(require("express-session"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const connection_1 = require("../DB Connection/connection");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 //creating an instance and setting parameters of the session middleware
 exports.sess = express_session_1.default({
     secret: "test",
@@ -24,23 +25,23 @@ exports.requestTracker = (req, res, next) => {
 };
 //authentication middleware with password hashing to authenticate users
 exports.auth = function (req, res, next) {
-    // const saltRounds: number = 10;
+    const saltRounds = 10;
     req.session.username = req.body.username;
     req.session.password = req.body.password;
     req.session.role = req.body.role;
-    console.log(req.session.username);
-    //const pass: any = bcrypt.hashSync(req.session.password, saltRounds);
+    const pass = bcrypt_1.default.hashSync(req.session.password, saltRounds);
     connection_1.db.one("SELECT username,password FROM members WHERE username=${user_name} AND password=${password} AND role=${role}", {
         user_name: req.session.username,
         password: req.session.password,
         role: req.session.role,
     })
         .then((result) => {
-        //if (bcrypt.compareSync(result.password, pass)) {
-        res.send("You are logged in");
-        /*  } else {
-          res.send("login failed");
-        } */
+        if (bcrypt_1.default.compareSync(result.password, pass)) {
+            res.send("You are logged in");
+        }
+        else {
+            res.send("login failed");
+        }
         next();
     })
         .catch((error) => {
@@ -49,7 +50,6 @@ exports.auth = function (req, res, next) {
 };
 //validator middleware
 exports.validator = function (req, res, next) {
-    console.log(req.session.username);
     if (req.session.username && req.session.password) {
         next();
     }
