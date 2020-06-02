@@ -27,6 +27,8 @@ export const requestTracker: any = (req: any, res: any, next: any) => {
   next();
 };
 
+let user: boolean;
+
 //authentication middleware with password hashing to authenticate users
 export let auth: any = function (req: any, res: any, next: any) {
   const saltRounds: number = 10;
@@ -47,6 +49,7 @@ export let auth: any = function (req: any, res: any, next: any) {
   )
     .then((result: any) => {
       if (bcrypt.compareSync(result.password, pass)) {
+        user = true;
         res.send("You are logged in");
       } else {
         res.send("login failed");
@@ -62,7 +65,7 @@ export let auth: any = function (req: any, res: any, next: any) {
 
 //validator middleware
 export const validator: any = function (req: any, res: any, next: any) {
-  if (req.session.username && req.session.password) {
+  if (user) {
     next();
   } else {
     res.send("sorry you are not authorized");

@@ -23,6 +23,7 @@ exports.requestTracker = (req, res, next) => {
     console.log(`A ${req.method} request was made to path ${req.path} on the following timestamp ${new Date()} and the query for this is ${req.query}`);
     next();
 };
+let user;
 //authentication middleware with password hashing to authenticate users
 exports.auth = function (req, res, next) {
     const saltRounds = 10;
@@ -37,6 +38,7 @@ exports.auth = function (req, res, next) {
     })
         .then((result) => {
         if (bcrypt_1.default.compareSync(result.password, pass)) {
+            user = true;
             res.send("You are logged in");
         }
         else {
@@ -50,7 +52,7 @@ exports.auth = function (req, res, next) {
 };
 //validator middleware
 exports.validator = function (req, res, next) {
-    if (req.session.username && req.session.password) {
+    if (user) {
         next();
     }
     else {
