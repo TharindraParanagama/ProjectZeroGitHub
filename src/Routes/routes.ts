@@ -109,5 +109,4 @@ path.post("/signup", function (req: any, res: any) {
 //route for a session termination
 path.get("/logout", function (req: any, res: any) {
   req.session.destroy();
-  res.redirect("/");
 });
