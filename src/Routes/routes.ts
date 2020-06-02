@@ -120,7 +120,6 @@ path.get("/price/:price", validator, function (req: any, res: any) {
     });
 });
 
-//route for new joiners
 path.post("/signup", function (req: any, res: any) {
   db.none("INSERT INTO members VALUES(${username},${password},${role})", {
     username: req.body.username,
@@ -132,6 +131,24 @@ path.post("/signup", function (req: any, res: any) {
     })
     .catch((error: any) => {
       res.send("please input valid information!");
+    });
+});
+
+//route for new joiners
+path.post("/contact", function (req: any, res: any) {
+  db.none(
+    "INSERT INTO customer_queries(FullName,email,message) VALUES(${FullName},${email},${message})",
+    {
+      FullName: req.body.name,
+      email: req.body.email,
+      message: req.body.message,
+    }
+  )
+    .then((result: any) => {
+      res.send("Thank You");
+    })
+    .catch((error: any) => {
+      res.send("Please re-check on your inputs!");
     });
 });
 

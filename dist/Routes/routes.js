@@ -99,7 +99,6 @@ exports.path.get("/price/:price", middleware_1.validator, function (req, res) {
         res.send("No records found");
     });
 });
-//route for new joiners
 exports.path.post("/signup", function (req, res) {
     connection_1.db.none("INSERT INTO members VALUES(${username},${password},${role})", {
         username: req.body.username,
@@ -111,6 +110,20 @@ exports.path.post("/signup", function (req, res) {
     })
         .catch((error) => {
         res.send("please input valid information!");
+    });
+});
+//route for new joiners
+exports.path.post("/contact", function (req, res) {
+    connection_1.db.none("INSERT INTO customer_queries(FullName,email,message) VALUES(${FullName},${email},${message})", {
+        FullName: req.body.name,
+        email: req.body.email,
+        message: req.body.message,
+    })
+        .then((result) => {
+        res.send("Thank You");
+    })
+        .catch((error) => {
+        res.send("Please re-check on your inputs!");
     });
 });
 //route for a session termination
