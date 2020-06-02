@@ -91,11 +91,26 @@ path.get("/rating/:supplier_rating", validator, function (req: any, res: any) {
     });
 });
 
+//filter by title
 path.get("/title/:title", validator, function (req: any, res: any) {
   let data: any = req.params;
 
   db.any("SELECT * FROM book_catalog WHERE title = ${title}", {
     title: data.title,
+  })
+    .then((result: any) => {
+      res.json(result);
+    })
+    .catch((error: any) => {
+      res.send("No records found");
+    });
+});
+
+path.get("/price/:price", validator, function (req: any, res: any) {
+  let data: any = req.params;
+
+  db.any("SELECT title FROM book_catalog WHERE price > ${price}", {
+    price: data.price,
   })
     .then((result: any) => {
       res.json(result);

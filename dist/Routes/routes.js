@@ -74,10 +74,23 @@ exports.path.get("/rating/:supplier_rating", middleware_1.validator, function (r
         res.send("No records found");
     });
 });
+//filter by title
 exports.path.get("/title/:title", middleware_1.validator, function (req, res) {
     let data = req.params;
     connection_1.db.any("SELECT * FROM book_catalog WHERE title = ${title}", {
         title: data.title,
+    })
+        .then((result) => {
+        res.json(result);
+    })
+        .catch((error) => {
+        res.send("No records found");
+    });
+});
+exports.path.get("/price/:price", middleware_1.validator, function (req, res) {
+    let data = req.params;
+    connection_1.db.any("SELECT title FROM book_catalog WHERE price > ${price}", {
+        price: data.price,
     })
         .then((result) => {
         res.json(result);
