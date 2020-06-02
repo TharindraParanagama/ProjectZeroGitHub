@@ -27,7 +27,7 @@ export const requestTracker: any = (req: any, res: any, next: any) => {
   next();
 };
 
-let user: boolean;
+let user: boolean = false;
 
 //authentication middleware with password hashing to authenticate users
 export let auth: any = function (req: any, res: any, next: any) {
