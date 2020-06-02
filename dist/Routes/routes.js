@@ -49,10 +49,10 @@ exports.path.get("/search", middleware_1.validator, function (req, res) {
 });
 //route to obtain the details for all the book supplied by a given supplier
 //affiliated with my store
-exports.path.get("/ID/:supplier_id", middleware_1.validator, function (req, res) {
-    let url = req.params;
-    connection_1.db.any("SELECT * FROM book_catalog WHERE supplier_id=${supplier_id}", {
-        supplier_id: url.supplier_id,
+exports.path.get("/author/:author", middleware_1.validator, function (req, res) {
+    let data = req.params;
+    connection_1.db.any("SELECT * FROM book_catalog WHERE author=${author}", {
+        author: data.author,
     })
         .then((result) => {
         res.json(result);
@@ -66,6 +66,18 @@ exports.path.get("/rating/:supplier_rating", middleware_1.validator, function (r
     let url = req.params;
     connection_1.db.any("SELECT title FROM book_catalog INNER JOIN supplier ON book_catalog.supplier_id=supplier.supplier_id WHERE supplier_rating > ${supplier_rating}", {
         supplier_rating: url.supplier_rating,
+    })
+        .then((result) => {
+        res.json(result);
+    })
+        .catch((error) => {
+        res.send("No records found");
+    });
+});
+exports.path.get("/title/:title", middleware_1.validator, function (req, res) {
+    let data = req.params;
+    connection_1.db.any("SELECT * FROM book_catalog WHERE title = ${title}", {
+        title: data.title,
     })
         .then((result) => {
         res.json(result);

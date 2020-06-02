@@ -57,11 +57,11 @@ path.get("/search", validator, function (req: any, res: any) {
 
 //route to obtain the details for all the book supplied by a given supplier
 //affiliated with my store
-path.get("/ID/:supplier_id", validator, function (req: any, res: any) {
-  let url: any = req.params;
+path.get("/author/:author", validator, function (req: any, res: any) {
+  let data: any = req.params;
 
-  db.any("SELECT * FROM book_catalog WHERE supplier_id=${supplier_id}", {
-    supplier_id: url.supplier_id,
+  db.any("SELECT * FROM book_catalog WHERE author=${author}", {
+    author: data.author,
   })
     .then((result: any) => {
       res.json(result);
@@ -83,6 +83,20 @@ path.get("/rating/:supplier_rating", validator, function (req: any, res: any) {
       supplier_rating: url.supplier_rating,
     }
   )
+    .then((result: any) => {
+      res.json(result);
+    })
+    .catch((error: any) => {
+      res.send("No records found");
+    });
+});
+
+path.get("/title/:title", validator, function (req: any, res: any) {
+  let data: any = req.params;
+
+  db.any("SELECT * FROM book_catalog WHERE title = ${title}", {
+    title: data.title,
+  })
     .then((result: any) => {
       res.json(result);
     })
