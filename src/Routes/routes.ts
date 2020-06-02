@@ -25,9 +25,7 @@ path.use(sess);
 path.use(cors(config));
 
 //route to the landing page with a get request
-path.get("/landingPage", function (req: any, res: any) {
-  res.send("Hi Welcome to the book store\n Please login to proceed.");
-});
+path.get("/", function (req: any, res: any) {});
 
 //route to the login portal with the user credentials to be specified in the
 //body of the request
@@ -111,5 +109,5 @@ path.post("/signup", function (req: any, res: any) {
 //route for a session termination
 path.get("/logout", function (req: any, res: any) {
   req.session.destroy();
-  res.redirect("/landingPage");
+  res.redirect("/");
 });

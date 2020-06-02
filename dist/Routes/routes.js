@@ -21,9 +21,7 @@ exports.path.use(middleware_1.bp);
 exports.path.use(middleware_1.sess);
 exports.path.use(cors_1.default(config));
 //route to the landing page with a get request
-exports.path.get("/landingPage", function (req, res) {
-    res.send("Hi Welcome to the book store\n Please login to proceed.");
-});
+exports.path.get("/", function (req, res) { });
 //route to the login portal with the user credentials to be specified in the
 //body of the request
 exports.path.post("/login", middleware_1.auth);
@@ -93,5 +91,5 @@ exports.path.post("/signup", function (req, res) {
 //route for a session termination
 exports.path.get("/logout", function (req, res) {
     req.session.destroy();
-    res.redirect("/landingPage");
+    res.redirect("/");
 });
