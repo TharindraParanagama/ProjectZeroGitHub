@@ -49,7 +49,7 @@ exports.path.get("/search", middleware_1.validator, function (req, res) {
 });
 //route to obtain the details for all the book supplied by a given supplier
 //affiliated with my store
-exports.path.get("/author/:author", middleware_1.validator, function (req, res) {
+exports.path.get("/author/:author", function (req, res) {
     let data = req.params;
     connection_1.db.any("SELECT * FROM book_catalog WHERE author=${author}", {
         author: data.author,
