@@ -16,7 +16,7 @@ pipeline {
         stage('Download') {
            steps {
               // Download code from a GitHub repository
-              git branch: 'jenkins', credentialsId: 'a092822c-5a98-4ee7-9fcc-885ef8363fef', url: 'https://github.com/TharindraParanagama/ProjectZeroGitHub.git'
+              git branch: 'master', credentialsId: 'a092822c-5a98-4ee7-9fcc-885ef8363fef', url: 'https://github.com/TharindraParanagama/ProjectZeroGitHub.git'
            }
         }
         stage('Install node modules'){
