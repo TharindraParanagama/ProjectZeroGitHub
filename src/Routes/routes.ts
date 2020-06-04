@@ -34,7 +34,7 @@ path.post("/login", auth);
 //multiple roles
 path.get("/role", validator, function (req: any, res: any) {
   if (req.session.role === "admin") {
-    res.send("Welcome to admin portal");
+    res.send("Welcome to admin portals");
   } else if (req.session.role === "vendor") {
     res.send("Welcome to vendor portal");
   } else {
