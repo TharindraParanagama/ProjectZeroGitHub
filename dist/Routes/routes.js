@@ -28,7 +28,7 @@ exports.path.post("/login", middleware_1.auth);
 //multiple roles
 exports.path.get("/role", middleware_1.validator, function (req, res) {
     if (req.session.role === "admin") {
-        res.send("Welcome to admin portal");
+        res.send("Welcome to admin portals");
     }
     else if (req.session.role === "vendor") {
         res.send("Welcome to vendor portal");
@@ -49,7 +49,7 @@ exports.path.get("/search", middleware_1.validator, function (req, res) {
 });
 //route to obtain the details for all the book supplied by a given supplier
 //affiliated with my store
-exports.path.get("/author/:author", function (req, res) {
+exports.path.get("/author/:author", middleware_1.validator, function (req, res) {
     let data = req.params;
     connection_1.db.any("SELECT * FROM book_catalog WHERE author=${author}", {
         author: data.author,
