@@ -8,18 +8,17 @@ exports.path = void 0;
 const express_1 = __importDefault(require("express"));
 const connection_1 = require("../DB Connection/connection");
 const middleware_1 = require("../Middleware/middleware");
-const cors_1 = __importDefault(require("cors"));
 //creating a router instance
 exports.path = express_1.default.Router();
-const config = {
-    origin: "http://localhost:3000",
-    credentials: true,
-};
+/* const config = {
+  origin: "http://localhost:3000",
+  credentials: true,
+}; */
 //using the middleware
 exports.path.use(middleware_1.requestTracker);
 exports.path.use(middleware_1.bp);
 exports.path.use(middleware_1.sess);
-exports.path.use(cors_1.default(config));
+//path.use(cors(config));
 //route to the landing page with a get request
 exports.path.get("/", function (req, res) { });
 //route to the login portal with the user credentials to be specified in the
