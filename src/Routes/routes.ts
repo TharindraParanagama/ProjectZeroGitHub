@@ -57,7 +57,7 @@ path.get("/search", validator, function (req: any, res: any) {
 
 //route to obtain the details for all the book supplied by a given supplier
 //affiliated with my store
-path.get("/author/:author", function (req: any, res: any) {
+path.get("/author/:author", validator, function (req: any, res: any) {
   let data: any = req.params;
 
   db.any("SELECT * FROM book_catalog WHERE author=${author}", {
